@@ -27,6 +27,10 @@ class Checkout
         else
           total += (prices.fetch(item) / 2) * count
         end
+      elsif item == :mango
+        count_for_free = count / 4
+        count_to_pay_for = count - count_for_free
+        total += prices.fetch(item) * count_to_pay_for
       else
         total += prices.fetch(item) * count
       end
