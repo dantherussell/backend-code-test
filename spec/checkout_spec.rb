@@ -1,12 +1,14 @@
 require 'spec_helper'
 require 'checkout'
+require 'inventory'
 
 RSpec.describe Checkout do
   describe '#total' do
     subject(:total) { checkout.total }
 
-    let(:checkout) { Checkout.new(pricing_rules) }
-    let(:pricing_rules) {
+    let(:checkout) { Checkout.new(inventory) }
+    let(:inventory) { Inventory.new(items) }
+    let(:items) {
       {
         apple: 10,
         orange: 20,
