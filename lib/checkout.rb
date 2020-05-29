@@ -18,7 +18,7 @@ class Checkout
       discount = discounts.items[item]
       line_item = inventory.line_items[item]
       if discount
-        at_offer_price = (discount[:limit] && count >= discount[:limit]) ? discount[:limit] : (count / discount[:count])
+        at_offer_price = (discount[:limit] && count >= discount[:count] * discount[:limit]) ? discount[:count] * discount[:limit] : (count / discount[:count])
         count = count - (at_offer_price * discount[:count])
         total += discount[:price] * at_offer_price
       end
