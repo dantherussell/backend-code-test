@@ -1,14 +1,27 @@
 require 'spec_helper'
 require 'checkout'
+require 'discounts'
 require 'inventory'
 
 RSpec.describe Checkout do
   describe '#total' do
     subject(:total) { checkout.total }
 
-    let(:checkout) { Checkout.new(inventory) }
-    let(:inventory) { Inventory.new(items) }
-    let(:items) {
+    let(:checkout) { Checkout.new(discounts, inventory) }
+    let(:discounts) { Discounts.new(discounts_list) }
+    let(:inventory) { Inventory.new(line_items) }
+
+    let(:discounts_list) {
+      {
+        apple: { count: 2, price: 10, limit: nil },
+        pear: { count: 2, price: 15, limit: nil },
+        banana: { count: 1, price: 15, limit: nil },
+        pineapple: { count: 1, price: 50, limit: 1 },
+        mango: { count: 4, price: 600, limit: nil },
+      }
+    }
+
+    let(:line_items) {
       {
         apple: 10,
         orange: 20,
